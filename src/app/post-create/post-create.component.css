@@ -1,0 +1,15 @@
+
+textarea,mat-form-field,input{
+  width: 100%;
+}
+mat-spinner{
+  margin:auto;
+}
+.image-preview {
+  height:5rem;
+  margin: 1rem 0rem;
+}
+.image-preview img {
+  height: 100%;
+  border-radius: 80%;
+}

@@ -1,0 +1,17 @@
+mat-expansion-panel{
+  display: block;
+  margin-top: 1rem;
+}
+.image-path{
+  width: 100%;
+  height: 50%;
+}
+.image-path img{
+
+  border-radius: 5%;
+  box-shadow: 2% ;
+  float: right;
+}
+mat-paginator{
+  margin-top: 1rem;
+}
