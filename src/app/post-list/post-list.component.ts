@@ -41,7 +41,9 @@ currentPage=1;
     this.isLoading=true
     this.postPerPage=event.pageSize;
     this.currentPage=event.pageIndex+1;
-    this.postsService.getPosts(this.postPerPage,this.currentPage);
+    const resp=this.postsService.getPosts(this.postPerPage,this.currentPage);
+    console.log("resp="+resp);
+    
 
   }
 

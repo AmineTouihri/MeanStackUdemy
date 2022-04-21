@@ -40,7 +40,8 @@ export class PostCreateComponent implements OnInit {
           title:postData.post.title,
           content:postData.post.content,
           image:postData.post.imagePath
-        })})
+        })
+      })
         this.isLoading=false
 
 

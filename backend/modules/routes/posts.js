@@ -2,6 +2,7 @@ const express=require("express");
 const route=express.Router();
 const Post=require('../post');
 const multer=require('multer');
+const authCheck=require("../../middleware/auth-check");
 const MimeType=
 {
   "image/png":"png",
@@ -15,6 +16,7 @@ const storage=multer.diskStorage({
     const isValid=MimeType[file.mimetype]
      error=new Error('invalid image');
     if (isValid){error=null}
+    
 
     cb(error,"backend/images")
   },
@@ -28,7 +30,7 @@ const storage=multer.diskStorage({
 
 
 
-route.post('',multer({storage:storage}).single("image"),(req,resp,next)=>{
+route.post('',authCheck,multer({storage:storage}).single("image"),(req,resp,next)=>{
   const url=req.protocol+"://"+req.get("host");
   const post=new Post(
     {
@@ -63,7 +65,7 @@ route.post('',multer({storage:storage}).single("image"),(req,resp,next)=>{
 
     //* ******************************Update One******************************************
 
-route.put('/:id',multer({storage:storage}).single("image"),(req,res,next)=>{
+route.put('/:id',authCheck,multer({storage:storage}).single("image"),(req,res,next)=>{
   let imagePath=req.body.imagePath
   if (req.file){
     const url=req.protocol+"://"+req.get("host");
@@ -106,7 +108,7 @@ route.get("",(req,resp,next)=>{
 
 //* ********************************************Delete**********************************************
 
-route.delete("/:id",(req,resp,next)=>{
+route.delete("/:id",authCheck,(req,resp,next)=>{
   Post.deleteOne({_id:req.params.id}).then(response=>console.log(response)).catch(err=>{console.log(err);})
   resp.status(200).json({message:"deleted"})
 

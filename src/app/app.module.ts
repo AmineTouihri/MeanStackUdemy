@@ -11,12 +11,15 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatCardModule} from '@angular/material/card';
-import {  ReactiveFormsModule } from '@angular/forms';
+import {  ReactiveFormsModule,FormsModule } from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
-import {HttpClientModule}from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS}from '@angular/common/http';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { LoginComponent } from './auth/login/login.component';
+import { RegisterComponent } from './auth/register/register.component';
+import { authInterceptor } from './auth/auth-interceptor';
 
 
 @NgModule({
@@ -24,7 +27,9 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     AppComponent,
     PostCreateComponent,
     PostListComponent,
-    HeaderComponent
+    HeaderComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -39,9 +44,10 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     HttpClientModule,
     MatProgressSpinnerModule,
     ReactiveFormsModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [{provide:HTTP_INTERCEPTORS,useClass:authInterceptor,multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

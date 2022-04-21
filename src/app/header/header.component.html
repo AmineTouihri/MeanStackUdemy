@@ -1,11 +1,15 @@
 <mat-toolbar color="primary">
 
-    <span>
+    <span *ngIf="isLogedIn">
       <a mat-button [routerLink]="'/create'" >Create New Post</a>
     </span>
     <span class="spacer"></span>
     <ul >
-    <li ><span><a mat-button [routerLink]="'/'" routerLinkActive="active" >My Posts</a></span></li>
+    <li *ngIf="isLogedIn" ><span><a mat-button [routerLink]="'/'" routerLinkActive="active" >My Posts</a></span></li>
+    <li *ngIf="!isLogedIn" ><span><a mat-button [routerLink]="'/login'" routerLinkActive="active" >Login</a></span></li>
+    <li *ngIf="!isLogedIn" ><span><a mat-button [routerLink]="'/register'" routerLinkActive="active" >Register</a></span></li>
+    <li *ngIf="isLogedIn" ><span><button mat-button  >LogOut</button></span></li>
+
   </ul>
 
 
