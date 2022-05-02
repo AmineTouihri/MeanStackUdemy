@@ -16,9 +16,9 @@ mongoose.connect("mongodb+srv://amine:opcAXh6n3jeSgVdb@cluster0.twhiu.mongodb.ne
 .then(()=>{console.log("connected to mangoDb");}).catch((error)=>{console.log(error)})
 
 app.use((req,resp,next)=>{
-  resp.header("Access-Control-Allow-Origin","*");
-  resp.header("Access-Control-Allow-Headers","Origin , X-Requested-With , Content-Type , Accept,authorization");
-  resp.header("Access-Control-Allow-Methods","GET,POST,PUT,PATCH,DELETE,OPTIONS")
+  resp.setHeader("Access-Control-Allow-Origin","*");
+  resp.setHeader("Access-Control-Allow-Headers","Origin , X-Requested-With , Content-Type , Accept,authorization");
+  resp.setHeader("Access-Control-Allow-Methods","GET,POST,PUT,PATCH,DELETE,OPTIONS")
   next()
 })
 app.use("/api/posts",Postroute);

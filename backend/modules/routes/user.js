@@ -26,7 +26,7 @@ route.post("/signup",(req,resp,next)=>{
 
 route.post("/login",(req,resp,next)=>{
     let fetchedUser;
-User.findOne({emial:req.body.email}).then(user=>{
+User.findOne({email:req.body.email}).then(user=>{
     console.log(user);
     fetchedUser=user
     if(!user){
@@ -44,7 +44,7 @@ User.findOne({emial:req.body.email}).then(user=>{
         {expiresIn:"1h"}
         );
         console.log(token);
-        resp.status(200).json({token:token});
+        resp.status(201).json({token:token});
 }).catch(err=>resp.status(401).json({message:'auth faildsss'}))
 })
 

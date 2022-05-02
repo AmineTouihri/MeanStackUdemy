@@ -29,6 +29,8 @@ export class AuthService {
     const auth:authModel={email:email,password:password};
     this.http.post<{token:string}>('http://localhost:3000/api/user/login',auth)
     .subscribe(result=>{
+      console.log(result.token);
+      
 this.token=result.token;
 this.authListener.next(true);
 
