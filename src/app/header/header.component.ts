@@ -22,5 +22,8 @@ this.authService.getAuthListener().subscribe((isLogedIn)=>{
   ngOnDestroy(): void {
     this.authListenerSub.unsubscribe();
   }
+  onLogOut(){
+    this.authService.logOut();
+  }
 
 }

@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
   constructor(private authService:AuthService) { }
   onSubmit(loginForm:NgForm){
 console.log(loginForm.value);
+this.isLoading=true;
 this.authService.loginUser(loginForm.value.email,loginForm.value.password);
 
 

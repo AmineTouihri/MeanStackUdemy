@@ -11,7 +11,7 @@
       <img [src]="post.imagePath" [alt]="post.title">
     </div>
     <p>{{post.content}}</p>
-    <mat-action-row>
+    <mat-action-row *ngIf="isLogedIn">
       <a mat-button color="warn" (click)="postDelete(post._id,i)">Delete</a>
       <button mat-button color="primary" [routerLink]="['/edit',post._id]">Edit It</button>
 

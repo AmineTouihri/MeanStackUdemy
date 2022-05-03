@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Subscription } from 'rxjs';
+import { AuthService } from '../auth/auth.service';
 import { PostModel } from '../shared/post-model';
 import { PostsServiceService } from '../shared/posts-service.service';
 
@@ -17,10 +18,14 @@ postlength=10;
 postPerPage=2;
 pageSizeOption=[1,2,5,10];
 currentPage=1;
-  constructor(private postsService:PostsServiceService) { }
+isLogedIn=false;
+
+authSubscription!:Subscription;
+  constructor(private postsService:PostsServiceService,private authService:AuthService) { }
 
 
   ngOnInit(): void {
+    this.isLogedIn=this.authService.getUserState();
     this.isLoading=true
     this.postsService.getPosts(this.postPerPage,this.currentPage);
     // this.isLoading=false
@@ -28,9 +33,14 @@ currentPage=1;
       this.isLoading=false;
 
     })
+
+    this.authSubscription=this.authService.getAuthListener().subscribe(res=>{
+      this.isLogedIn=res;
+    })
   }
   ngOnDestroy(): void {
-      this.sub.unsubscribe()
+      this.sub.unsubscribe();
+      this.authSubscription.unsubscribe();
   }
   postDelete(id:string,index:number){
      this.postsService.onDeletee(id,index)
@@ -46,5 +56,6 @@ currentPage=1;
     
 
   }
+ 
 
 }

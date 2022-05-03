@@ -11,7 +11,9 @@ export class RegisterComponent implements OnInit {
   isLoading=false
   constructor(private authService:AuthService) { }
   onSubmit( loginForm:NgForm){
+    this.isLoading=true;
     this.authService.createUser(loginForm.value.email,loginForm.value.password)
+    
   }
 
   ngOnInit(): void {
